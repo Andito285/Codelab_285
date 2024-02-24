@@ -1,0 +1,38 @@
+package org.example;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        System.out.print("Masukkan nama: ");
+        String nama = scanner.nextLine();
+        System.out.print("Masukkan tanggal lahir (dd-MM-yyyy): ");
+        String tanggalLahir = scanner.nextLine();
+        LocalDate dateOfBirth = LocalDate.parse(tanggalLahir, formatter);
+        System.out.print("Masukkan jenis kelamin (P/L): ");
+        String jenisKelamin = scanner.next();
+        String jenisKelaminLengkap = "";
+        if (jenisKelamin.equalsIgnoreCase("P")) {
+            jenisKelaminLengkap = "Perempuan";
+        } else if (jenisKelamin.equalsIgnoreCase("L")) {
+            jenisKelaminLengkap = "Laki-laki";
+        } else {
+            System.out.println("Jenis kelamin tidak valid.");
+            return;
+        }
+
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(dateOfBirth, now);
+        int umur = period.getYears();
+
+        System.out.println("Data diri anda:");
+        System.out.println("Nama: " + nama);
+        System.out.println("Jenis kelamin: " + jenisKelaminLengkap);
+        System.out.println("Umur: " + umur + " tahun");
+    }
+}
